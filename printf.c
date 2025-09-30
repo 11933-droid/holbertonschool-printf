@@ -1,6 +1,33 @@
 #include "main.h"
 
 /**
+ * handle_format - handles format specifiers
+ * @format: format string
+ * @args: argument list
+ * @i: pointer to index in format string
+ *
+ * Return: number of characters printed
+ */
+int handle_format(const char *format, va_list args, int *i)
+{
+	int count = 0;
+
+	if (format[*i] == 'c')
+		count += print_c(args);
+	else if (format[*i] == 's')
+		count += print_s(args);
+	else if (format[*i] == '%')
+		count += print_percent();
+	else
+	{
+		write(1, "%", 1);
+		write(1, &format[*i], 1);
+		count += 2;
+	}
+	return (count);
+}
+
+/**
  * _printf - simple printf
  * @format: string with format
  *
@@ -9,7 +36,8 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int i = 0, count = 0;
+	int i = 0;
+	int count = 0;
 
 	if (format == NULL)
 		return (-1);
@@ -21,25 +49,12 @@ int _printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
-
 			if (format[i] == '\0')
 			{
 				va_end(args);
 				return (-1);
 			}
-
-			if (format[i] == 'c')
-				count += print_c(args);
-			else if (format[i] == 's')
-				count += print_s(args);
-			else if (format[i] == '%')
-				count += print_percent();
-			else
-			{
-				write(1, "%", 1);
-				write(1, &format[i], 1);
-				count += 2;
-			}
+			count += handle_format(format, args, &i);
 		}
 		else
 		{
