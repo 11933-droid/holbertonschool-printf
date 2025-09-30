@@ -3,7 +3,8 @@
 /**
  * _printf - simple printf
  * @format: string with format
- * Return: number of chars printed
+ *
+ * Return: number of chars printed, or -1 on error
  */
 int _printf(const char *format, ...)
 {
@@ -20,6 +21,13 @@ int _printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
+
+			if (format[i] == '\0')
+			{
+				va_end(args);
+				return (-1);
+			}
+
 			if (format[i] == 'c')
 				count += print_c(args);
 			else if (format[i] == 's')
