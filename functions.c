@@ -44,3 +44,43 @@ int print_percent(void)
 	return (1);
 }
 
+/**
+ * print_d - prints a signed integer %d and %i
+ * @args: list of arguments
+ * Return: number of char printed
+ */
+
+int print_d(va_list args)
+{
+	int n = va_arg(args, int);
+	int len = 0;
+	char buf[12];
+	int i = 0;
+
+	if (n < 0)
+	{
+		write(1, "-", 1);
+		len++;
+	}
+	if (n == 0)
+	{
+		write(1, "0", 1);
+		return (len + 1);
+	}
+	while (n != 0)
+	{
+		int digit = n % 10;
+
+		if (digit < 0)
+			digit = -digit;
+		buf[i++] = (char)(digit + '0');
+		n /= 10;
+	}
+	while (i > 0)
+	{
+		i--;
+		write(1, &buf[i], 1);
+		len++;
+	}
+	return (len);
+}
