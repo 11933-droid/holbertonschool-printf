@@ -12,5 +12,7 @@ int print_c(va_list args);
 int print_s(va_list args);
 int print_percent(void);
 
+/* integers (%d, %i) */
+
 #endif /* MAIN_H */
 
