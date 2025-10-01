@@ -18,6 +18,8 @@ int handle_format(const char *format, va_list args, int *i)
 		count += print_s(args);
 	else if (format[*i] == '%')
 		count += print_percent();
+	else if (format[*i] == 'd' || format[*i] == 'i')
+		count += print_d(args);/*for task 1*/
 	else
 	{
 		write(1, "%", 1);
