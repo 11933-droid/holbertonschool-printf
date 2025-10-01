@@ -13,6 +13,7 @@ int print_s(va_list args);
 int print_percent(void);
 
 /* integers (%d, %i) */
+int print_d(va_list args);
 
 #endif /* MAIN_H */
 
