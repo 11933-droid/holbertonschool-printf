@@ -1,0 +1,35 @@
+.TH _PRINTF 3 "October 2025" "Holberton School" "Library Functions Manual"
+
+.SH NAME
+_printf \- simple printf implementation
+
+.SH SYNOPSIS
+.B int _printf(const char *format, ...);
+
+.SH DESCRIPTION
+The
+.B _printf()
+function prints formatted output to the standard output.
+
+Supported format specifiers:
+.TP
+%c   Print a single character.
+.TP
+%s   Print a string.
+.TP
+%%   Print a percent sign.
+.TP
+%d, %i   Print a signed decimal integer.
+
+.SH RETURN VALUE
+On success, returns the number of characters printed.
+On error, returns \-1.
+
+.SH EXAMPLES
+.nf
+_printf("Hello %s, your score is %d%%\n", "Sara", 100);
+Output: Hello Sara, your score is 100%
+.fi
+
+.SH AUTHORS
+Written by Ali (11933-droid) and Sara (saraum1).
